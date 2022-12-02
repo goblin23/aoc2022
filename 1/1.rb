@@ -2,7 +2,7 @@
 
 if __FILE__ == $0
     elves = []
-    file = File.open "/Users/gschoeni/repos/aoc2022/1/calories.txt"
+    file = File.open "~/repos/aoc2022/1/calories.txt"
     input = file.read.split(/^\n/)
     input.each do |line|
         sum = 0
