@@ -2,43 +2,45 @@
 
 class Rock
     VALUE = 1
+    def X
+        return 0 + Scissors::VALUE
+    end
+    def Y
+       return 3 + Rock::VALUE
+    end
+    def Z
+        return 6 + Paper::VALUE
+    end
 end
 class Paper
     VALUE = 2
+    def X
+        return 0 + Rock::VALUE
+    end
+    def Y
+        return 3 + Paper::VALUE
+    end
+    def Z
+        return 6 + Scissors::VALUE
+    end
 end
 class Scissors
     VALUE = 3
-end
-
-def evaluate(object1, object2)
-    return 3 if object1.class == object2.class
-    if object1.instance_of? Rock
-        if object2.instance_of? Paper
-            return 6
-        else
-            return 0
-        end
+    def X
+        return 0 + Paper::VALUE
     end
-    if object1.instance_of? Paper
-        if object2.instance_of? Scissors
-            return 6
-        else
-            return 0
-        end
+    def Y
+        return 3 + Scissors::VALUE
     end
-    if object1.instance_of? Scissors
-        if object2.instance_of? Rock
-            return 6
-        else
-            return 0
-        end
+    def Z
+        return 6 + Rock::VALUE
     end
 end
 
 def objectize(text)
-    return Rock.new if text == "A" or text == "X" 
-    return Paper.new if text == "B" or text == "Y" 
-    return Scissors.new  if text == "C" or text == "Z" 
+    return Rock.new if text == "A" 
+    return Paper.new if text == "B" 
+    return Scissors.new  if text == "C"
 end
 
 
@@ -50,9 +52,8 @@ if __FILE__ == $0
     lines.each do |line|
         game = line.split
         player1 = objectize(game[0])
-        player2 = objectize(game[1])
-        result = evaluate(player1,player2)
-        total += result + player2.class::VALUE
+        result = player1.send(game[1])
+        total += result 
     end
     puts total
 end
